@@ -1,0 +1,224 @@
+Name :Mujassir Mufeez
+
+PART A:
+	Q1. Answer c- RIGHT OUTER JOIN
+	Q2. Answer c- GROUP BY
+	Q3. Answer d- CREATE TABLE
+	Q4. Answer b- To establish a relationship with another table
+	Q5. Answer b- A subquery is a query within another query 
+	Q6. Answer b
+	Q7. Answer a- ISNULL()
+	Q8. Answer b- 
+	Q9. Answer b
+	Q10.Answer c
+
+PART B:
+		2.
+CREATE TABLE `department` (
+  `DepartmentID` int NOT NULL,
+  `DepartmentName` varchar(100) NOT NULL,
+  PRIMARY KEY (`DepartmentID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
+CREATE TABLE `employee` (
+  `EmployeeID` int NOT NULL,
+  `FirstName` varchar(100) NOT NULL,
+  `LastName` varchar(100) NOT NULL,
+  `DepartmentID` int NOT NULL,
+  `HireDate` date NOT NULL,
+  `MonthlySalary` double NOT NULL,
+  PRIMARY KEY (`EmployeeID`),
+  KEY `DepartmentID_idx` (`DepartmentID`),
+  CONSTRAINT `DepartmentID` FOREIGN KEY (`DepartmentID`) REFERENCES `department` (`DepartmentID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
+CREATE TABLE `project` (
+  `ProjectID` int NOT NULL,
+  `ProjectName` varchar(50) NOT NULL,
+  PRIMARY KEY (`ProjectID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+product=[]
+value=dict()
+
+
+CREATE TABLE `employee` (
+  `DepartmentID` int ,
+  `ProjectID int,
+  PRIMARY KEY (`EmployeeID`,`ProjectID`),
+  
+  CONSTRAINT `DepartmentID` FOREIGN KEY (`DepartmentID`) REFERENCES `department` (`DepartmentID`),
+  CONSTRAINT `ProjectID` FOREIGN KEY (`ProjectID`) REFERENCES `project` (`ProjectID`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+3.
+	a. select d.DepartmentName count(e.EmployeeID) 
+	   from employee e, department d 
+	   where e.departmentID=d.departmentID and d.HireDate>'2021-01-01' group by d.DepartmentName
+	b. select count(e.EmployeeID) 
+	   from employee e where e.MonthlySalary > (select avg(ee.MonthlySalary) from employee ee , department d 
+						     where ee.DepartmentID=d.DepartmentID and d.DepartmentName='Engineering' group 						     group by(d.DepartmentID)
+	c. select e.FirstName,p.projectName
+	   from employee e,p.ProjectName
+           join  department d on e.DepartmentID=d.DepratmentID
+	   join department_project dp on d.DepartmentID=dp.DepartmentID
+	   join project p on p.ProjectID=dp.ProjectID 
+	  
+	d. select sum(e.MonthlySalary) as ManPowerCost
+	   from employee e,p.ProjectName
+           join  department d on e.DepartmentID=d.DepratmentID
+	   join department_project dp on d.DepartmentID=dp.DepartmentID
+	   join project p on p.ProjectID=dp.ProjectID 
+	   group by p.ProjectID
+							
+
+
+
+
+
+
+
+
+
+
+PART c:
+	Q1:array=[1,2,3,4,5,6]
+	   even=[]
+	   for i in array:
+   		 if i%2==0:
+    		    even.append(i)
+
+	   print("Even numbers in given array",even)
+	
+	Q2:student={'name':'Alex','age':22,'major':'Computer Science'}
+
+	   #access the value of major key
+           print(student['major'])
+        Q3:a.
+		import pandas as pd
+		#for Example
+		df=pd.DataFrame({
+    			'customer_id':[1001,1002,1003,1004,1001],
+    			'order_date':['2025-07-8','2025-06-28','2025-05-28','2025-06-18','2025-07-01'],
+    			'sales_amount':[2000.00,3500.00,4000.00,5000.00,6000.00],
+    
+    		})
+
+		# grouping by customer_id and calculate the sum
+
+		group_df=df.groupby('customer_id').sum()
+		print(group_df)
+		
+		b.
+		import pandas as pd
+		#for Example
+		df=pd.DataFrame({
+		    'customer_id':[1001,1002,1003,1004,1001],
+		    'order_date':['2025-07-8','2025-06-28','2025-05-28','2025-06-18','2025-07-01'],
+    		    'sales_amount':[200.00,3500.00,400.00,5000.00,600.00],
+    
+   		 })
+
+		# grouping by customer_id and calculate the sum
+
+		group_df=df.groupby('customer_id').sum()
+		print(group_df)
+		filter_value=group_df.loc[group_df['sales_amount']>1000]
+
+		print(filter_value)
+
+		c.import pandas as pd
+		  #for Example
+		  df=pd.DataFrame({
+   		  'customer_id':[1001,1002,1003,1004,1001],
+  		  'order_date':['2025-07-8','2025-06-28','2025-05-28','2025-06-18','2025-07-01'],
+  		  'sales_amount':[200.00,3500.00,400.00,5000.00,600.00],
+    
+  		  })
+
+		# grouping by customer_id and calculate the sum
+
+		group_df=df.groupby('customer_id').sum()
+
+		sorted_df=group_df.sort_values(by='sales_amount',ascending=False)
+
+		print(sorted_df)
+
+
+
+		d.
+		import pandas as pd
+		#for Example
+		df=pd.DataFrame({
+   		 'customer_id':[1001,1002,1003,1004,1001],
+   		 'order_date':['2025-07-8','2025-06-28','2025-05-28','2025-06-18','2025-07-01'],
+    		 'sales_amount':[200.00,3500.00,400.00,5000.00,600.00],
+    
+    		})
+
+		# grouping by customer_id and calculate the sum
+
+
+
+		df['Average_order_value']=df.groupby('customer_id')['sales_amount'].mean()
+		print(df)
+
+
+
+	PART D:
+		1.
+
+
+
+def takeinput():
+    product_id=str(input("Enter the prodct_id"))
+    name=str(input("Enter product name"))
+    price=str(input("Enter price : "))
+    if(price==None):
+        price='None'
+        value['price']=price
+        value['product_id']=product_id
+        value['name']=name
+    else:
+        value['price']='$'+price
+        value['product_id']=product_id
+        value['name']=name
+    
+    price=None
+    product_id=None
+    product.append(value)
+
+while True:
+    print("press 1- enter product ")
+    print("press 2 for exit")
+    num=int(input("Enter the option"))
+    if(num==1):
+        takeinput()
+    elif num==2:
+        break
+    else:
+        print("Enter the correctoption")
+
+clean_data=[]
+for item in product :
+    val={item['price']}
+    print(val)
+    price=0.0
+    if val=='None':
+        price=0.0
+    else:
+        value=val[1:]
+        price=float(value)
+        
+
+    
+    value['product_id']={item['product_id']}
+    value['name']={item['name']}
+    value['price']=price
+    clean_data.append(value)
+    
+print(clean_data)
+
+
